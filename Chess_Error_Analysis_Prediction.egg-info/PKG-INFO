@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: Chess-Error-Analysis-Prediction
+Version: 0.0.1
+Author: Steven
+Author-email: 120138752+stevenhan777@users.noreply.github.com
+License-File: LICENSE
+Requires-Dist: pandas
+Requires-Dist: numpy
+Requires-Dist: seaborn
+Dynamic: author
+Dynamic: author-email
+Dynamic: license-file
+Dynamic: requires-dist

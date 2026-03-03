@@ -1,0 +1,9 @@
+LICENSE
+README.md
+setup.py
+Chess_Error_Analysis_Prediction.egg-info/PKG-INFO
+Chess_Error_Analysis_Prediction.egg-info/SOURCES.txt
+Chess_Error_Analysis_Prediction.egg-info/dependency_links.txt
+Chess_Error_Analysis_Prediction.egg-info/requires.txt
+Chess_Error_Analysis_Prediction.egg-info/top_level.txt
+src/__init__.py
