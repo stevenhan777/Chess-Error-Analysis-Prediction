@@ -4,9 +4,14 @@ Version: 0.0.1
 Author: Steven
 Author-email: 120138752+stevenhan777@users.noreply.github.com
 License-File: LICENSE
-Requires-Dist: pandas
-Requires-Dist: numpy
-Requires-Dist: seaborn
+Requires-Dist: Flask==3.1.2
+Requires-Dist: gunicorn==21.2.0
+Requires-Dist: numpy==1.26.4
+Requires-Dist: pandas==2.2.3
+Requires-Dist: scikit-learn==1.5.2
+Requires-Dist: dill==0.4.0
+Requires-Dist: imbalanced-learn==0.14.1
+Requires-Dist: xgboost==2.1.1
 Dynamic: author
 Dynamic: author-email
 Dynamic: license-file
