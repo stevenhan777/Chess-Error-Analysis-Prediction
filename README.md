@@ -41,7 +41,30 @@ RandomizedSearchCV with stratified k-fold cross-validation is used to tune each 
 The full pipeline is implemented in a modular way: components folder containing data_ingestion.py, data_transformation.py, and model_trainer.py. Pipeline folder containing predict_pipeline.py and train_pipeline.py. Application.py (Flask server and Dash dashboard).
 
 #### 9) Flask + Dash Web Application
-The web application allows a user to enter their Lichess username, load their game history, and automatically train personalised models on their data. The dashboard provides two sections of descriptive analytics (error rates by time pressure, game phase, complexity, and volatility) and predictive tools (time trouble threshold analysis, post-game error attribution, and a game risk timeline). The risk timeline accepts any Lichess game URL and plots predicted blunder and inaccuracy risk across every move alongside actual errors.
+The web application allows a user to enter their Lichess username, load their game history, and automatically train personalised models on their data. The dashboard provides two sections of descriptive analytics (error rates by time pressure, game phase, complexity, and volatility) and predictive tools (time trouble threshold analysis, post-game error attribution, and a game risk timeline). The risk timeline accepts any Lichess game URL and plots predicted blunder and inaccuracy risk across 
+every move alongside actual errors.
+
+<img width="398" height="434" alt="loadpage" src="https://github.com/user-attachments/assets/d00078fc-34c6-42c4-9f62-6a6befef31ff" />
+
+<img width="923" height="463" alt="time_pressure" src="https://github.com/user-attachments/assets/ea9e2a8a-6112-4ad0-a05e-30966f2f6c3d" />
+
+<img width="898" height="310" alt="trend_lines" src="https://github.com/user-attachments/assets/2c0afcf3-73f9-4098-88cc-e674df6b4779" />
+
+<img width="905" height="491" alt="errorrate_gamephase" src="https://github.com/user-attachments/assets/be66d3e7-3397-40ab-8a42-3559d37acc53" />
+
+<img width="911" height="506" alt="errorrate_volatility" src="https://github.com/user-attachments/assets/624fcba4-dede-431d-950d-5bfdfa3cfe18" />
+
+<img width="907" height="511" alt="errorrate_complexity" src="https://github.com/user-attachments/assets/a5434ceb-6534-4c45-9199-df59022137a7" />
+
+<img width="896" height="491" alt="timespentratio_distribution" src="https://github.com/user-attachments/assets/705530ca-a4af-45c6-8c62-841709f3164e" />
+
+<img width="923" height="465" alt="blunder_threshold" src="https://github.com/user-attachments/assets/50a4fc4f-9a3b-44c2-9782-52ced0e3518b" />
+
+<img width="871" height="520" alt="timeline_prediction_chart" src="https://github.com/user-attachments/assets/e4aed248-9b25-47aa-8649-d8bc3e4c1c43" />
+
+<img width="897" height="502" alt="gamesummary_move_detail" src="https://github.com/user-attachments/assets/d59008ff-1216-4da8-aa76-f42dbd693e1a" />
+
+<img width="931" height="476" alt="post_game_error" src="https://github.com/user-attachments/assets/06967621-80b8-4e39-83f9-47d8fd4a47c5" />
 
 #### 10) AWS Deployment
 The application is deployed to AWS using Elastic Beanstalk and CodePipeline for continuous deployment.
