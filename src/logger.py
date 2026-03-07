@@ -1,6 +1,6 @@
 """
 src/logger.py
-Centralised logging configuration for the chess error analysis project.
+Centralised logging configuration for the chess error analysis prediction project.
 """
 
 import logging

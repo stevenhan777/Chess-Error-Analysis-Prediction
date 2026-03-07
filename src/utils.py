@@ -1,6 +1,6 @@
 """
 src/utils.py
-Shared utility helpers used across the chess analysis project.
+Shared utility helpers used across the chess analysis prediction project.
 """
 
 import os
@@ -18,7 +18,7 @@ MODELS_DIR = "models"
 
 
 def tc_label(perf_type: str) -> str:
-    """Map perf_type string → file-naming label ('blitz' or 'standard')."""
+    """Map perf_type string to file-naming label ('blitz' or 'standard')."""
     return "blitz" if perf_type == "blitz" else "standard"
 
 

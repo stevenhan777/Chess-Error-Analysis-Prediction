@@ -5,6 +5,7 @@ import requests
 import numpy as np
 import pandas as pd
 
+# preliminary feature engineering
 def _engineer_features(df, username):
 
     # Filter to only have my games:
@@ -18,7 +19,7 @@ def _engineer_features(df, username):
     df.loc[mask, 'time_spent_sec'] = df.loc[mask, 'time_spent_sec'] + df.loc[mask, 'increment_sec']
     df.loc[mask, 'time_spent_cs']  = df.loc[mask, 'time_spent_cs']  + df.loc[mask, 'increment_sec'] * 100
 
-    # set these remaining to zero
+    # set the negative time_spent to zero
     df.loc[df['time_spent_cs'] < 0, 'time_spent_cs'] = 0
     df.loc[df['time_spent_sec'] < 0, 'time_spent_sec'] = 0
 
@@ -29,7 +30,7 @@ def _engineer_features(df, username):
 
     # drop the original time_spent_ratio column
     df = df.drop('time_spent_ratio', axis=1)
-    # Recalcualted the new column: Calculate how much longer/shorter this move was compared to average
+    # Recalcualted the new column: Calculate how much longer/shorter this move was compared to average time spent per move per game
     df['time_spent_ratio'] = df['time_spent_sec'] / df['avg_time_spent_per_move']
 
     # Cap time_spent_sec to time_left_sec where violated
@@ -67,7 +68,7 @@ def _engineer_features(df, username):
 
     df = pd.concat(results).reset_index(drop=True)
 
-    # Error flags from judgment 
+    # Error flags created 
     df['is_inaccuracy'] = ((df['eval_loss'] >= 100) & (df['eval_loss'] < 200)).astype(int)
     df['is_mistake'] = ((df['eval_loss'] >= 200) & (df['eval_loss'] < 300)).astype(int)
     df['is_blunder'] = (df['eval_loss'] >= 300).astype(int)
@@ -87,6 +88,7 @@ def _engineer_features(df, username):
     BLACK_CAP   = min_eval - BLACK_CAP_BUFFER
     BLACK_FLOOR = min_eval - FLOOR_BUFFER
 
+    # define the unified_eval: if checkmate, return largest possible value
     def unified_eval(row):
         if row['is_checkmate']:
             return WHITE_CAP if row['color'] == 'white' else BLACK_CAP
@@ -135,12 +137,17 @@ def _engineer_features(df, username):
     df['time_pressure_norm'] = (1 - df['time_left_ratio']).clip(0, 1)
 
     # Interaction terms
+    # a complex position is only dangerous if short on time
     df['material_time_pressure_int'] = df['complexity_material_norm'] * df['time_pressure_norm']
+
+    # volatile (sharp) position only dangerous if short on time
     df['time_eval_volatility_int']   = df['time_pressure_norm']        * df['eval_volatility_norm']
 
     df['move_number_norm'] = df.groupby('game_id')['move_number'].transform(
         lambda x: (x - x.min()) / (x.max() - x.min() + 1)
     )
+
+    # high move number late in the endgame as opposed to early in endgame
     df['late_endgame_int'] = df['move_number_norm'] * df['is_endgame']
 
     # Accumulated time pressure: are you consistently low on time, or did you just spend a lot on this one move?

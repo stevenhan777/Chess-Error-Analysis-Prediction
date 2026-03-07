@@ -48,11 +48,12 @@ def _track_board_state(moves_san):
     board_states = []
     pieces_remaining = 32
     num_pawns, num_minor_pieces, num_rooks, num_queens = 16, 8, 4, 2
-    wck = wcq = bck = bcq = False
+    wck = wcq = bck = bcq = False # wck = white castle kingside; all set to False
 
     for i, move in enumerate(moves_san):
         color = 'white' if i % 2 == 0 else 'black'
 
+        # find castling move
         if move.startswith('O-O-O'):
             if color == 'white': wcq = True
             else:                bcq = True
@@ -60,10 +61,12 @@ def _track_board_state(moves_san):
             if color == 'white': wck = True
             else:                bck = True
 
+        # find pawn promotions
         prom_q = '=Q' in move
         prom_r = '=R' in move
-        prom_m = '=B' in move or '=N' in move
+        prom_m = '=B' in move or '=N' in move # promotion to minor piece
 
+        # update number of pieces
         if 'x' in move:
             pieces_remaining = max(0, pieces_remaining - 1)
             clean = move.replace('+','').replace('#','').replace('=Q','').replace('=R','').replace('=B','').replace('=N','')
@@ -74,14 +77,17 @@ def _track_board_state(moves_san):
             elif first == 'Q':         num_queens       = max(0, num_queens       - 1)
             else:                      num_pawns        = max(0, num_pawns        - 1)
 
+        # update number of pieces if promotions
         if   prom_q: num_pawns = max(0, num_pawns-1); num_queens       += 1
         elif prom_r: num_pawns = max(0, num_pawns-1); num_rooks        += 1
         elif prom_m: num_pawns = max(0, num_pawns-1); num_minor_pieces += 1
 
+        # final safety check
         num_pawns = max(0, num_pawns); num_minor_pieces = max(0, num_minor_pieces)
         num_rooks = max(0, num_rooks); num_queens       = max(0, num_queens)
         pieces_remaining = max(0, pieces_remaining)
 
+        # define endgame phase as no queens OR less than 14 pieces remain OR less than 6 non-pawn pieces remain
         move_number = (i // 2) + 1
         total_non_pawn = num_minor_pieces + num_rooks + num_queens
         is_endgame = num_queens == 0 or pieces_remaining < 14 or total_non_pawn < 6
@@ -89,24 +95,26 @@ def _track_board_state(moves_san):
         if is_endgame:
             is_opening = is_middlegame = False
         else:
+            # define opening phase as if move number less than 15 AND both queens present AND > 26 pieces AND at least one side uncastled
             is_opening = (
                 move_number < 15
                 and num_queens >= 2
                 and pieces_remaining > 26
                 and (not (wck or wcq) or not (bck or bcq))
             )
+            # for opening phase, if both sides castled, it is false. If pieces left < 16 or past move 15, opening is false
             if (wck or wcq) and (bck or bcq): is_opening = False
             if pieces_remaining < 16 or move_number > 15: is_opening = False
             is_middlegame = not is_opening
 
         board_states.append({
             'pieces_remaining':   pieces_remaining,
-            'material_density':   pieces_remaining / 32,
+            'material_density':   pieces_remaining / 32, # ratio to total number of pieces
             'num_minor_pieces':   num_minor_pieces,
             'num_rooks':          num_rooks,
             'num_queens':         num_queens,
             'num_pawns':          num_pawns,
-            'complexity_material_score': (num_pawns + 3*num_minor_pieces + 5*num_rooks + 9*num_queens),
+            'complexity_material_score': (num_pawns + 3*num_minor_pieces + 5*num_rooks + 9*num_queens), # weighted score of number of pieces
             'white_castled_king':  1 if wck else 0,
             'white_castled_queen': 1 if wcq else 0,
             'black_castled_king':  1 if bck else 0,
@@ -186,6 +194,7 @@ def _to_move_level(games):
             else:
                 evals_list.append(None)
 
+            # calculating eval volatility as rolling standard deviation of last 3 moves eval
             vol = None
             if i >= 2:
                 recent = [evals_list[j] for j in range(max(0, i-2), i+1) if evals_list[j] is not None]
