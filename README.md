@@ -1,4 +1,7 @@
 # Chess-Error-Analysis-and-Prediction
+
+Dashboard Link: http://chess-error-analysis-prediction-5-env.eba-np5widfm.us-east-1.elasticbeanstalk.com/
+
 ### Predicting blunders and inaccuracies in chess games using player-specific machine learning models:
 
 * Identifying the problem space and determining what chess error patterns are worth predicting
