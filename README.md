@@ -47,38 +47,27 @@ Move-level features are derived from the raw API data, including time pressure n
     - complexity_material_score
     - white_castled_king, etc
     - queen_present
-    - is_opening, etc: 
-      # define endgame phase as no queens OR less than 14 pieces remain OR less than 6 non-pawn pieces remain
-
-                  # define opening phase as if move number less than 15 AND both queens present AND > 26 pieces AND at least one side uncastled
-
-
-    # for opening phase, if both sides castled, it is false. If pieces left < 16 or past move 15, opening is false
+    - is_opening: define opening phase as if move number less than 15 AND both queens present AND > 26 pieces AND at least one side uncastled. For opening phase, if both sides castled, it is false. If pieces left < 16 or past move 15, opening is false
+    - is_endgame: define endgame phase as no queens OR less than 14 pieces remain OR less than 6 non-pawn pieces remain
     - complexity_material_score: # weighted score of number of pieces
-
     - is_pawn_move, etc
     - avg_time_spent_per_move:  # Add average time spent per move per game
     - time_spent_ratio
-    - eval_unified: combine eval and mate into one: The logic: mate situations should be more extreme than any centipawn eval in the dataset, but not infinitely so. WHITE_CAP sits just above the highest real eval, and WHITE_FLOOR sits further above that. Mate scores get mapped into the band between CAP and FLOOR depending on how many moves away mate is.
-    When m = 1 (mate in 1), the formula gives exactly WHITE_CAP — the most extreme value, since mate is imminent. When m = max_white_mate (mate in the longest sequence seen in the dataset), it gives exactly WHITE_FLOOR — the least extreme mate value, since it's far away. Everything in between is linearly interpolated.
-
+    - eval_unified: combine eval and mate into one. The logic: mate situations should be more extreme than any centipawn eval in the dataset, but not infinitely so. Mate scores get mapped into the band that sits above the greatest eval depending on how many moves away mate is.
     - eval_volatility: rolling std of eval_unified over last 3 moves
     - is_mate_threat, is_checkmate
     - eval_loss
     - is_inaccuracy, is_mistake, is_blunder: the target binary vars : created by error loss
     - color_white
-    - complxity material norm: Divides every value by the 95th percentile of the distribution, then clips to 0–1. This means:
+    - complxity material norm: Divides every value by the 95th percentile of the distribution, then clips to 0–1.
     - same for eval vlaioliy norm
     - time_pressure_norm - flipped of time_left_ratio
-
-A game at the 95th percentile of material complexity → gets a score of exactly 1.0
-
 * Interaction terms:
-    - material_time_pressure_int: complexity_material_norm x time_pressure_norm: The idea: a complicated position is only dangerous when you're short on time. A position with many pieces, queens still on the board, and high material density demands calculation — but if you have plenty of time, you can work through it carefully and find the right move. It's only when you're rushed that the complexity becomes a blunder risk.
+    - material_time_pressure_int: complexity_material_norm x time_pressure_norm: The idea: a complicated position is only dangerous when you're short on time. A position with many pieces, queens still on the board, and high material density demands calculation. But if you have plenty of time, you can work through it carefully and find the right move. It's only when you're rushed that the complexity becomes a blunder risk.
     
-    - time_eval_volatility_int: time_pressure_norm x eval_volatility_norm: Again, sharpness alone isn't fatal if you have time to calculate. And time pressure in a stable, quiet position is less catastrophic. But sharp position + time pressure is exactly the scenario where players consistently blunder 
-    - late_endgame_int: move_number_norm x is_endgame: This one is subtler. is_endgame is a binary flag, but not all endgame moves are equally risky. The move_number_norm component adds a temporal dimension — it tracks how far into the game you are relative to that game's total length.
-    - cumulative_time_pressure: expanding mean of time_spent_ratio: The expanding mean disambiguates this. By the time you're on move 20, the model knows whether you've been consistently rushing (high expanding mean throughout) or whether this single expensive move was an isolated deep think
+    - time_eval_volatility_int: time_pressure_norm x eval_volatility_norm: Again, sharpness of the position alone isn't fatal if you have time to calculate. And time pressure in a stable, quiet position is less catastrophic. But sharp position + time pressure is exactly the scenario where players consistently blunder 
+    - late_endgame_int: move_number_norm x is_endgame: This one is subtler. is_endgame is a binary flag, but not all endgame moves are equally risky. The move_number_norm component tracks how far into the game you are relative to that game's total length.
+    - cumulative_time_pressure: expanding mean of time_spent_ratio. By the time you're on move 20, the model knows whether you've been consistently rushing (high expanding mean throughout) or whether this single long move was an isolated deep think
 
 #### 4) Exploratory Data Analysis
 EDA and hypothesis testing are performed on each dataset to examine how error rates vary across time pressure bins, game phase, board complexity, and eval volatility. This informed both feature selection and the decision to model blitz and standard time controls separately.
