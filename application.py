@@ -54,6 +54,9 @@ def load_data():
 
     return flask.redirect('/dashboard/')
 
+@server.route('/health')
+def health():
+    return 'OK', 200
 
 ERROR_COLS   = ['is_inaccuracy', 'is_mistake', 'is_blunder']
 ERROR_LABELS = ['Inaccuracy', 'Mistake', 'Blunder']
