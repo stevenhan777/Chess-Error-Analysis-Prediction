@@ -33,7 +33,7 @@ def home():
 def load_data():
     username  = flask.request.form.get('username', '').strip()
     perf_type = flask.request.form.get('perf_type', 'blitz')
-    max_games = int(flask.request.form.get('max_games', 5000))
+    max_games = int(flask.request.form.get('max_games', 1000))
 
     if not username:
         return flask.render_template('home.html', error='Please enter a username.')
