@@ -95,43 +95,43 @@ The web application allows a user to enter their Lichess username, load their ga
 
 Login page  
 
-<img width="923" height="463" alt="time_pressure" src="https://github.com/user-attachments/assets/ea9e2a8a-6112-4ad0-a05e-30966f2f6c3d" />  
+<img width="923" height="463" alt="time_pressure" src="https://github.com/user-attachments/assets/ea9e2a8a-6112-4ad0-a05e-30966f2f6c3d" />    
 
 Error rate by time remaining bins
 
-<img width="898" height="310" alt="trend_lines" src="https://github.com/user-attachments/assets/2c0afcf3-73f9-4098-88cc-e674df6b4779" />  
+<img width="898" height="310" alt="trend_lines" src="https://github.com/user-attachments/assets/2c0afcf3-73f9-4098-88cc-e674df6b4779" />    
 
 Error rate vs time remaining plotted as line chart
 
-<img width="905" height="491" alt="errorrate_gamephase" src="https://github.com/user-attachments/assets/be66d3e7-3397-40ab-8a42-3559d37acc53" />  
+<img width="905" height="491" alt="errorrate_gamephase" src="https://github.com/user-attachments/assets/be66d3e7-3397-40ab-8a42-3559d37acc53" />    
 
 Error rate by game phase and summary table
 
-<img width="911" height="506" alt="errorrate_volatility" src="https://github.com/user-attachments/assets/624fcba4-dede-431d-950d-5bfdfa3cfe18" />  
+<img width="911" height="506" alt="errorrate_volatility" src="https://github.com/user-attachments/assets/624fcba4-dede-431d-950d-5bfdfa3cfe18" />    
 
 Error rate by engine evaluation volatility and summary table
 
-<img width="907" height="511" alt="errorrate_complexity" src="https://github.com/user-attachments/assets/a5434ceb-6534-4c45-9199-df59022137a7" />  
+<img width="907" height="511" alt="errorrate_complexity" src="https://github.com/user-attachments/assets/a5434ceb-6534-4c45-9199-df59022137a7" />    
 
 Error rate by position complexity quartile and summary table
 
-<img width="896" height="491" alt="timespentratio_distribution" src="https://github.com/user-attachments/assets/705530ca-a4af-45c6-8c62-841709f3164e" />  
+<img width="896" height="491" alt="timespentratio_distribution" src="https://github.com/user-attachments/assets/705530ca-a4af-45c6-8c62-841709f3164e"/>    
 
 Time spent ratio by error category box plots and summary table
 
-<img width="923" height="465" alt="blunder_threshold" src="https://github.com/user-attachments/assets/50a4fc4f-9a3b-44c2-9782-52ced0e3518b" />  
+<img width="923" height="465" alt="blunder_threshold" src="https://github.com/user-attachments/assets/50a4fc4f-9a3b-44c2-9782-52ced0e3518b" />    
 
 Blunder rate threshold predictive tool
 
-<img width="871" height="520" alt="timeline_prediction_chart" src="https://github.com/user-attachments/assets/e4aed248-9b25-47aa-8649-d8bc3e4c1c43" />  
+<img width="871" height="520" alt="timeline_prediction_chart" src="https://github.com/user-attachments/assets/e4aed248-9b25-47aa-8649-d8bc3e4c1c43" />    
 
 Game risk timeline predictive tool
 
-<img width="897" height="502" alt="gamesummary_move_detail" src="https://github.com/user-attachments/assets/d59008ff-1216-4da8-aa76-f42dbd693e1a" />  
+<img width="897" height="502" alt="gamesummary_move_detail" src="https://github.com/user-attachments/assets/d59008ff-1216-4da8-aa76-f42dbd693e1a" />    
 
 Sample game with move-by-move chess error prediction probability and if player made actual error 
 
-<img width="931" height="476" alt="post_game_error" src="https://github.com/user-attachments/assets/06967621-80b8-4e39-83f9-47d8fd4a47c5" />  
+<img width="931" height="476" alt="post_game_error" src="https://github.com/user-attachments/assets/06967621-80b8-4e39-83f9-47d8fd4a47c5" />    
 
 Post game analysis tool for error analysis, the dominant game phase and primary error driver
 
