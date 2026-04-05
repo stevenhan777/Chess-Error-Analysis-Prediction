@@ -1,7 +1,5 @@
 # Chess-Error-Analysis-and-Prediction
 
-Dashboard Link: http://chess-error-analysis-prediction-5-env.eba-np5widfm.us-east-1.elasticbeanstalk.com/
-
 ### Predicting blunders and inaccuracies in chess games using player-specific machine learning models:
 
 * Identifying the problem space and determining what chess error patterns can be predicted
@@ -136,8 +134,8 @@ Sample game with move-by-move chess error prediction probability and if player m
 Post game analysis tool for error analysis, the dominant game phase and primary error driver
 
 #### 10) AWS Deployment
-The application is deployed to AWS using Elastic Beanstalk and CodePipeline for continuous deployment.
+The application was deployed to AWS using Elastic Beanstalk and CodePipeline.
 
 #### Conclusion
-This project produces a personalized error and analytics tool for chess players, built on their own game histories. Key challenges included engineering complex new features, capturing error signals that occur in only 1–5% of moves, developing separate models for faster and slower time controls, and distinguishing between inaccuracies and blunders. Given the rarity of errors, PR AUC was used as the primary evaluation metric. The result is a deployable, player-specific tool that translates raw game data into interpretable error risk predictions.
+This project produces a personalized error and analytics tool for chess players, built on their own game histories. Key challenges included engineering complex new features, capturing error signals that occur in only 1–5% of moves, developing separate models for faster and slower time controls, and distinguishing between inaccuracies and blunders. Given the rarity of errors, PR AUC was used as the primary evaluation metric. The result is a player-specific tool that translates raw game data into interpretable error risk predictions.
 
